@@ -16,6 +16,11 @@
 <%= f.label :名前 %>
 <%= f.text_field :name %>
 
+<%= f.label :プロフィル画像 %>
+    <%= image_tag(@user.profile_image.url) if @user.profile_image && @user.profile_image.url %>
+    <%= f.file_field :profile_image %>
+    <%= f.hidden_field :profile_image_cache %>
+
 <%= f.label :メールアドレス %>
 <%= f.email_field :email %>
 
