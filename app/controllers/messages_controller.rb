@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @favorite = current_user.favorites.find_by(message_id: @message.id)
   end
 
   # GET /messages/new
@@ -23,18 +24,15 @@ class MessagesController < ApplicationController
 
   # POST /messages
   # POST /messages.json
-  def create
-    @message = Message.new(message_params)
+ def create
+    @message = current_user.messages.build(message_params)
 
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+    if @message.save
+      redirect_to @message, notice: '投稿しました！'
+    else
+      render :new, notice: '投稿に失敗しました！'
     end
+
   end
 
   # PATCH/PUT /messages/1

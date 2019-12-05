@@ -1,7 +1,5 @@
 <h1>新規登録</h1>
 
-<%= form_with(model:@user, local: true) do |f| %>
-
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -12,24 +10,29 @@
     </ul>
   </div>
 <% end %>
-
-<%= f.label :名前 %>
-<%= f.text_field :name %>
-
-<%= f.label :プロフィル画像 %>
-    <%= image_tag(@user.profile_image.url) if @user.profile_image && @user.profile_image.url %>
-    <%= f.file_field :profile_image %>
-    <%= f.hidden_field :profile_image_cache %>
-
-<%= f.label :メールアドレス %>
-<%= f.email_field :email %>
-
-<%= f.label :パスワード %>
-<%= f.password_field :password %>
-
-<%= f.label :確認用パスワード%>
-<%= f.password_field :password_comfirmation%>
-
-<%= f.submit "アカウントを作成する"%>
-
-<% end %>
+    <div class="form-group">
+      <%= form_with(model: @user, local: true) do |f| %>
+      <%= f.label :お名前 %>
+      <%= f.text_field :name, required: true, placeholder: "Write your name" ,class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :メールアドレス %>
+      <%= f.email_field :email, required: true, placeholder: "Write your email",class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :パスワード %>
+      <%= f.password_field :password, required: true, placeholder: "Password",class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :確認用パスワード %>
+      <%= f.password_field :password_confirmation, required: true, placeholder: "Password Confirmation",class: "form-control" %><br>
+    </div>
+    <div class="form-group">
+      <%= f.label :picture %>
+      <%= f.file_field :picture, required: true, placeholder: "Password Confirmation",class: "form-control" %><br>
+    </div>
+    <div class="actions">
+      <%= f.submit "登録", class: "btn btn-default btn-sm" %>
+    </div>
+    <% end %>
+  </div>
