@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
+	before_action :set_message, only: [:edit]
+
 def new
 	@user = User.new
+end
+
+def edit
+	
 end
 
 def create
@@ -17,6 +23,11 @@ def show
 	end
 
 private
+
+def set_message
+      @user = User.find(params[:id])
+end
+
 
 def user_params
 	params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
