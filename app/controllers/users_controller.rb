@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_message, only: [:edit]
+	before_action :set_message, only: [:edit, :show, :update]
 
 def new
 	@user = User.new
@@ -19,10 +19,23 @@ def create
 end
 
 def show
-		@user = User.find(params[:id])
 	end
 
-private
+def update
+	if current_user = @user	
+		if @user.update(user_params)
+			flash[:success] = 'ユーザー情報を編集しました！'
+			render :show
+		else
+			flash.now[:danger] = 'ユーザー情報の編集に失敗しました！！'
+			render :edit
+		end	
+	else
+		flash[:dender]= '他人のプロフィール情報は編集できません！'
+		redirect_to  @user
+	end
+end
+
 
 def set_message
       @user = User.find(params[:id])
