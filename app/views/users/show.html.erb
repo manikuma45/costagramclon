@@ -3,3 +3,7 @@
 <P><%= image_tag @user.picture.url%>プロフィール画像</P>
 
 <p>メールアドレス: <%= @user.email %></p>
+
+<%= link_to 'お気に入り一覧', favorites_path, class:"btn btn-default" %>
+
+<%= link_to 'Edit', edit_user_path(@user), class:"btn btn-default" %>
