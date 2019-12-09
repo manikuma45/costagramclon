@@ -5,15 +5,18 @@
   <% @messages.each do |message| %>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <%= image_tag message.image_url%>
+      <%= image_tag message.image_url %>
       <div class="caption">
         <h4>投稿者</h4>
         <p><%= message.user.name %></p>
         <h4>内容</h4>
         <p><%=message.content%></p>
-        <p><%= link_to 'Show', message, class:"btn btn-default" %>
+        <p>
+          <%= link_to 'Show', message, class:"btn btn-default" %>
+          <% if message.user.id == current_user.id %>
            <%= link_to 'Edit', edit_message_path(message), class:"btn btn-default" %>
            <%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-default" %>
+           <% end %>
         </p>
       </div>
     </div>

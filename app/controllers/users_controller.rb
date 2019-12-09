@@ -22,7 +22,7 @@ def show
 	end
 
 def update
-	if current_user = @user	
+	if current_user == @user
 		if @user.update(user_params)
 			flash[:success] = 'ユーザー情報を編集しました！'
 			render :show
@@ -36,6 +36,7 @@ def update
 	end
 end
 
+private
 
 def set_message
       @user = User.find(params[:id])

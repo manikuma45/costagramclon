@@ -17,6 +17,5 @@
     <%= link_to 'お気に入りする', favorites_path(message_id: @message.id), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
-
 <%= link_to 'Edit', edit_message_path(@message) %> |
 <%= link_to 'Back', messages_path %>
