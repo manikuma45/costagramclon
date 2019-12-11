@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(message_params)
 
     if @message.save
+      MessageMailer.message_mail(@message).deliver
       redirect_to @message, notice: '投稿しました！'
     else
       render :new, notice: '投稿に失敗しました！'
