@@ -15,14 +15,11 @@
         <li class="active"><%=link_to "プロフィール", user_path(current_user.id)%></li>
         <li> <%=link_to "ログアウトする", session_path(current_user.id), method: :delete%></li>
         <li> <%=link_to "メッセージ一覧", messages_path %></li>
+        <li><%= link_to "新規メッセージ", new_message_path%></li>
         <% else %>
-        <li><%=link_to "新規アカウント登録", new_user_path%></li>
+        <li><%=link_to "新規アカウント登録", new_user_path, data: { turbolinks: false }%></li>
         <li><%=link_to "ログイン", new_session_path%></li>
         <% end %>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "新規メッセージ", new_message_path%></li>
       </ul>
     </div>
   </div>
