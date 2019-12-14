@@ -30,28 +30,28 @@ class MessagesController < ApplicationController
 
   def update
     if current_user.id == @message.user_id
-    if @message.update(message_params)
-     redirect_to @message, notice: 'Message was successfully updated.' 
-   else
+      if @message.update(message_params)
+       redirect_to @message, notice: '投稿を更新しました！！' 
+     else
+      flash.now[:danger] = 'ユーザー情報の編集に失敗しました！！'
+      render :edit
+    end
     flash.now[:danger] = 'ユーザー情報の編集に失敗しました！！'
-    render :edit
   end
-  flash.now[:danger] = 'ユーザー情報の編集に失敗しました！！'
-  end
-  end
+end
 
 def destroy
   @message.destroy
-  redirect_to messages_url, notice: 'Message was successfully destroyed.' 
+  redirect_to messages_url, notice: '投稿を削除しました！！' 
 end
 
 private
 
 def restrict_to_user
   unless current_user == @message.user
-  flash[:alert] = "あなたの投稿ではありません！"
-  redirect_to root_path
-end
+    flash[:alert] = "あなたの投稿ではありません！"
+    redirect_to root_path
+  end
 end
 
 def set_message
